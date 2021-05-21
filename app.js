@@ -9,12 +9,14 @@ if (location) {
         if (error) {
             console.log(error);
         } else {
-            forecast(geocodeData.latitude, geocodeData.longitude, (error, forecastData) => {
+            const { latitude, longitude, location } = geocodeData;
+            forecast(latitude, longitude, (error, forecastData) => {
+                const { weather_descriptions, temperature, feelslike } = forecastData;
                 if (error) {
                     console.log(error);
                 } else {
-                    console.log(geocodeData.location);
-                    console.log(`${forecastData.desc.join(' and ')}. It is currently ${forecastData.temp} degrees out. It feels like ${forecastData.feelslike} degrees out.`);
+                    console.log(location);
+                    console.log(`${weather_descriptions.join(' and ')}. It is currently ${temperature} degrees out. It feels like ${feelslike} degrees out.`);
                 }
             });
         }
